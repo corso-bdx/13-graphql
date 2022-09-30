@@ -1,0 +1,30 @@
+query {
+  a: libro (skip: 2  take: 2
+    where: {
+      editore: { nome: { neq: "Einaudi" } }
+      and: {
+        autore: { inAttivita: { eq: true } }
+        and: { costo: { gte: 10 }, and: { costo: { lte: 100 } } }
+      }
+    }
+    order: { costo: ASC, titolo: DESC }
+  ) {
+		items {
+    	codice
+			titolo
+			prezzo
+			autore {
+				nome
+				cognome
+				inAttivita
+			}
+			casaEditrice {
+				nome
+			}
+		} pageInfo {
+			hasNextPage
+			hasPreviousPage
+		}
+		totalCount
+  }
+}

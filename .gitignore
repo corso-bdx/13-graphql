@@ -1,0 +1,7 @@
+﻿################################################################################
+# Il file gitignore è stato creato automaticamente da Microsoft(R) Visual Studio.
+################################################################################
+
+/TestGQL/.vs/TestGQL
+/TestGQL/TestGQL/bin/Debug/net6.0
+/TestGQL/TestGQL/obj

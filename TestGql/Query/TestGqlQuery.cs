@@ -5,22 +5,21 @@ using TestGql.Types;
 namespace TestGql.Query;
 
 public class TestGqlQuery {
-    [UseDbContext(typeof(TestGqlDbContext))]
+    [UseProjection]
     [UseFiltering]
     [UseSorting]
     [GraphQLDescription("Elenco degli autori di libri")]
-    public IQueryable<Autore> GetAutore([Service(ServiceKind.Pooled)] TestGqlDbContext context) => context.Autori;
+    public IQueryable<Autore> GetAutore(TestGqlDbContext context) => context.Autori;
 
-    [UseDbContext(typeof(TestGqlDbContext))]
+    [UseProjection]
     [UseFiltering]
     [UseSorting]
     [GraphQLDescription("Elenco delle case editrici")]
-    public IQueryable<CasaEditrice> GetCasaEditrice([Service(ServiceKind.Pooled)] TestGqlDbContext context) => context.CaseEditrici;
+    public IQueryable<CasaEditrice> GetCasaEditrice(TestGqlDbContext context) => context.CaseEditrici;
 
-    [UseDbContext(typeof(TestGqlDbContext))]
-    //[UseOffsetPaging(IncludeTotalCount = true)]
+    [UseProjection]
     [UseFiltering(typeof(LibroFilterType))]
     [UseSorting(typeof(LibroSortType))]
     [GraphQLDescription("Elenco dei libri presenti in archivio")] 
-    public IQueryable<Libro> GetLibro([Service(ServiceKind.Pooled)] TestGqlDbContext context) => context.Libri;
+    public IQueryable<Libro> GetLibro(TestGqlDbContext context) => context.Libri;
 }

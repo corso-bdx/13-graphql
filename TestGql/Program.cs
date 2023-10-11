@@ -20,8 +20,10 @@ builder.Services.AddPooledDbContextFactory<TestGqlDbContext>(opt => opt.UseSqlSe
 builder.Services
     .AddGraphQLServer()
     .AllowIntrospection(true)
+    .RegisterDbContext<TestGqlDbContext>(DbContextKind.Pooled)
     .AddQueryType<TestGqlQuery>()
     .AddType<LibroObjectType>()
+    .AddProjections()
     .AddFiltering()
     .AddSorting();
 

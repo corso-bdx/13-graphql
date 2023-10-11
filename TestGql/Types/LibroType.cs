@@ -26,17 +26,17 @@ public class LibroObjectType : ObjectType<Libro> {
 
         //descriptor
         //    .Field(x => x.BestSeller)
-        //    .Description("Flag indicativo del fatto che il libro in archivio è un bestseller");
+        //    .Description("Flag indicativo del fatto che il libro in archivio è un bestseller").Ignore();
 
         descriptor
             .Field(x => x.AutoreID)
-            .Description("Codice univoco dell'autore del libro")
-            .Ignore();
+            .Description("Codice univoco dell'autore del libro");
+            //.Ignore();
 
         descriptor
             .Field(x => x.CasaEditriceID)
-            .Description("Codice univoco della casa editrice del libro")
-            .Ignore();
+            .Description("Codice univoco della casa editrice del libro");
+            //.Ignore();
 
         descriptor
             .Field(x => x.Autore)
@@ -53,11 +53,11 @@ public class LibroObjectType : ObjectType<Libro> {
     }
 
     private class Resolver {
-        public Autore? GetAutore([Parent] Libro libro, [Service(ServiceKind.Pooled)] TestGqlDbContext context) {
+        public Autore? GetAutore([Parent] Libro libro, TestGqlDbContext context) {
             return context.Autori.Where(x => x.AutoreID == libro.AutoreID).FirstOrDefault();
         }
 
-        public CasaEditrice? GetCasaEditrice([Parent] Libro libro, [Service(ServiceKind.Pooled)] TestGqlDbContext context) {
+        public CasaEditrice? GetCasaEditrice([Parent] Libro libro, TestGqlDbContext context) {
             return context.CaseEditrici.Where(x => x.CasaEditriceID == libro.CasaEditriceID).FirstOrDefault();
         }
     }
